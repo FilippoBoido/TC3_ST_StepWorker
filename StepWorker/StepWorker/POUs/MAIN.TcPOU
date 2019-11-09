@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="MAIN" Id="{b63b2f9e-7008-4ed9-b68d-d2eaed7795ed}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbStepWorker : FB_StepWorker;
+	Valve1 : Actuator;
+	Valve2 : Actuator;
+	Valve3 : Actuator;
+	fbUintComparator : UintComparator;
+	uiCounter : UINT;
+	uiDesiredStep : UINT := 10;
+	fbRelease : Boolean;
+	bReportTimeout : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbUintComparator();
+fbStepWorker();
+
+CASE fbStepWorker.uiStep OF
+
+	0:	
+	
+		fbUintComparator.mEquals(fbStepWorker.uiStep,uiDesiredStep);
+		
+		fbStepWorker
+			.mAddCondition(Valve1.fbOutput)
+			.mAddCondition(Valve2.fbOutput)
+			.mAddCondition(Valve3.fbOutput);
+			
+		fbStepWorker.mNextStep(10);
+		
+		
+	10:	
+	
+		fbStepWorker
+			.mConfigureTimeout(T#10S)
+			.mAddCondition(fbUintComparator)
+			.mAddCondition(fbRelease);
+			
+		fbStepWorker.mNextStep(20);
+		bReportTimeout := fbStepWorker.bTimeout;
+		
+	20:
+		;
+	
+END_CASE;
+
+
+			
+			]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="29" Count="1" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="23" Count="2" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="8" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

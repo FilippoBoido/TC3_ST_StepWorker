@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <Itf Name="I_StepWorker" Id="{6e16077e-14a2-4353-85e5-4c73ddfcb1e4}">
+    <Declaration><![CDATA[INTERFACE I_StepWorker
+]]></Declaration>
+    <Method Name="mAddCondition" Id="{22238d22-4d9e-4af6-9b13-3aa58c4ea183}">
+      <Declaration><![CDATA[METHOD PUBLIC mAddCondition : I_StepWorker
+VAR_INPUT
+	itfStepCondition : I_StepCondition;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <Itf Name="I_StepCondition" Id="{f45c417b-68ad-4c0b-a126-3513c0ea3d19}">
+    <Declaration><![CDATA[INTERFACE I_StepCondition
+]]></Declaration>
+    <Property Name="getValue" Id="{7b981ae6-3b99-4c83-942d-56104da4fffc}">
+      <Declaration><![CDATA[PROPERTY getValue : BOOL]]></Declaration>
+      <Get Name="Get" Id="{8abdf485-509b-48f2-8800-a75dc7f05f5e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="setValue" Id="{6923ac5c-b313-4703-97f2-d0ab16e525c6}">
+      <Declaration><![CDATA[PROPERTY setValue : Bool]]></Declaration>
+      <Set Name="Set" Id="{97471d9e-d88e-451e-bd32-9c86b92b9898}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

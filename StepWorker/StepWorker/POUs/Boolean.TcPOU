@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="Boolean" Id="{5a25ad0f-0be9-40c2-a688-0b7e5ac06027}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC Boolean IMPLEMENTS I_StepCondition
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bValue : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="getValue" Id="{2ef472d3-2576-4eb6-86b5-a760f7cf25e3}">
+      <Declaration><![CDATA[PROPERTY getValue : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{b387bbd5-5b88-464d-8939-5b2f201fd48a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[getValue := bValue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="setValue" Id="{6d88ed92-8dc0-4fa2-a3c1-f0af7a358ad9}">
+      <Declaration><![CDATA[
+PROPERTY setValue : BOOL
+]]></Declaration>
+      <Set Name="Set" Id="{4bcac0eb-fbde-4ecf-b327-e522662e0592}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bValue := setValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="Boolean">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="Boolean.getValue.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Boolean.setValue.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

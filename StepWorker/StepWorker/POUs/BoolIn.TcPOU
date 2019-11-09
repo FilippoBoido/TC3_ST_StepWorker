@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="BoolIn" Id="{370a6c08-2d5a-402b-b600-192f1fdc1dc6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC BoolIn IMPLEMENTS I_StepCondition
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bValue AT%I* : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="getValue" Id="{641c2af3-70fb-41ab-be46-84f24b7f90b0}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY getValue : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{7ebe42a3-3ad0-437c-82d6-968da80e6195}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[getValue := bValue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="setValue" Id="{89adadce-2c51-491c-a739-6235884b2a94}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY setValue : BOOL
+]]></Declaration>
+      <Set Name="Set" Id="{08200bd5-86b2-47c7-b485-02f152ca4088}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bValue := setValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="BoolIn">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolIn.getValue.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolIn.setValue.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

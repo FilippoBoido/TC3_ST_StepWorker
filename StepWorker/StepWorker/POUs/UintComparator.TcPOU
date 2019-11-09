@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="UintComparator" Id="{c3538391-8178-426b-8224-2c8c8631c8cc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK UintComparator IMPLEMENTS I_Comparator,I_StepCondition
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	uiSelector 		: UINT;
+	rInternTarget1 	: REFERENCE TO UINT;
+	rInternTarget2 	: REFERENCE TO UINT;
+	bValue			: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF( rInternTarget1 )
+OR NOT __ISVALIDREF( rInternTarget1 )
+THEN
+	uiSelector := 0;
+END_IF 
+
+CASE uiSelector OF
+
+	0:;
+		
+	10:
+		bValue := mEquals(rInternTarget1,rInternTarget2);
+		
+	20:
+		bValue := mGreaterThan(rInternTarget1,rInternTarget2);
+	
+	30:
+		bValue := mLessThan(rInternTarget1,rInternTarget2);
+	
+	40:
+		bValue := mGreaterEquals(rInternTarget1,rInternTarget2);
+		
+	50:
+		bValue := mLessEquals(rInternTarget1,rInternTarget2);
+		
+END_CASE]]></ST>
+    </Implementation>
+    <Property Name="getValue" Id="{b035f5c0-b3d9-4e77-b7e0-2d7e9fc6953c}">
+      <Declaration><![CDATA[
+PROPERTY getValue : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{bbb91f6a-1d65-496c-99a4-e5223dff608b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[getValue := bValue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="mEquals" Id="{9dfb4363-47be-4e33-bb70-454ad60c93e8}">
+      <Declaration><![CDATA[METHOD mEquals : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 10;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mEquals := ( rTarget1 = rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mGreaterEquals" Id="{7e4c987c-fe00-48c4-9cf5-8c637cbfeefe}">
+      <Declaration><![CDATA[METHOD PUBLIC mGreaterEquals : BOOL
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 40;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mGreaterEquals := ( rTarget1 >= rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mGreaterThan" Id="{91d34b43-fc7c-44fe-a6d9-a896f1425185}">
+      <Declaration><![CDATA[METHOD mGreaterThan : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 20;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mGreaterThan := ( rTarget1 >= rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mLessEquals" Id="{2bd9425f-805a-45a5-8f1d-134f0d8c116a}">
+      <Declaration><![CDATA[METHOD mLessEquals : BOOL
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 50;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mLessEquals := ( rTarget1 <= rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mLessThan" Id="{0b685c53-bb9a-4f2a-870d-f38717898207}">
+      <Declaration><![CDATA[METHOD mLessThan : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 30;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mLessThan := ( rTarget1 < rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="setValue" Id="{6c9d6573-9f69-4bf2-84c3-df921f23e5eb}">
+      <Declaration><![CDATA[
+PROPERTY setValue : BOOL
+]]></Declaration>
+      <Set Name="Set" Id="{8e52679c-e344-4394-a23c-1197e935ed4f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bValue := setValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="UintComparator">
+      <LineId Id="40" Count="2" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="32" Count="3" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.getValue.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.mEquals">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.mGreaterEquals">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.mGreaterThan">
+      <LineId Id="13" Count="3" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.mLessEquals">
+      <LineId Id="6" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.mLessThan">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.setValue.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

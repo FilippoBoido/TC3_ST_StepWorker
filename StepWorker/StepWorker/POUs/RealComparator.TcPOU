@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="RealComparator" Id="{02bbad16-b8d9-4e04-97e5-bfaa15967471}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK RealComparator IMPLEMENTS I_Comparator,I_StepCondition
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	uiSelector 		: UINT;
+	rInternTarget1 	: REFERENCE TO REAL;
+	rInternTarget2 	: REFERENCE TO REAL;
+	bValue			: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF( rInternTarget1 )
+OR NOT __ISVALIDREF( rInternTarget1 )
+THEN
+	uiSelector := 0;
+END_IF 
+
+CASE uiSelector OF
+
+	0:;
+		
+	10:
+		bValue := mEquals(rInternTarget1,rInternTarget2);
+		
+	20:
+		bValue := mGreaterThan(rInternTarget1,rInternTarget2);
+	
+	30:
+		bValue := mLessThan(rInternTarget1,rInternTarget2);
+	
+	40:
+		bValue := mGreaterEquals(rInternTarget1,rInternTarget2);
+		
+	50:
+		bValue := mLessEquals(rInternTarget1,rInternTarget2);
+		
+END_CASE]]></ST>
+    </Implementation>
+    <Property Name="getValue" Id="{9041c42c-02c7-4fea-a22d-aa28bdf19b19}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY getValue : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{7337f85c-a90f-4ac1-b033-27d1473262c3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[getValue := bValue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="mEquals" Id="{6dbb10c8-8aed-4161-8274-d1dd8363efb5}">
+      <Declaration><![CDATA[METHOD mEquals : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO REAL;
+	rTarget2 : REFERENCE TO REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 10;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mEquals := ( rTarget1 = rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mGreaterEquals" Id="{7b6378aa-87d3-4f2c-a0be-fb7cd30d2928}">
+      <Declaration><![CDATA[METHOD PUBLIC mGreaterEquals : BOOL
+VAR_INPUT
+	rTarget1 : REFERENCE TO REAL;
+	rTarget2 : REFERENCE TO REAL;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 40;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mGreaterEquals := ( rTarget1 >= rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mGreaterThan" Id="{f15d0c5f-c114-455e-9628-3193613a41da}">
+      <Declaration><![CDATA[METHOD mGreaterThan : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO REAL;
+	rTarget2 : REFERENCE TO REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 20;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mGreaterThan := ( rTarget1 >= rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mLessEquals" Id="{404562b5-ed1c-464d-991d-2458e1596a73}">
+      <Declaration><![CDATA[METHOD mLessEquals : BOOL
+VAR_INPUT
+	rTarget1 : REFERENCE TO REAL;
+	rTarget2 : REFERENCE TO REAL;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 50;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mLessEquals := ( rTarget1 <= rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mLessThan" Id="{12c3eea7-d035-48e7-9a5f-42510dc9d720}">
+      <Declaration><![CDATA[METHOD mLessThan : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO REAL;
+	rTarget2 : REFERENCE TO REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[uiSelector := 30;
+rInternTarget1 REF= rTarget1;
+rInternTarget2 REF= rTarget2;
+
+mLessThan := ( rTarget1 < rTarget2 );]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="setValue" Id="{0e6a1b91-1846-4a0c-89e1-107d504f2dfd}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY setValue : BOOL
+]]></Declaration>
+      <Set Name="Set" Id="{46f9b5c8-e93f-4182-92ab-60490802f80a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bValue := setValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="RealComparator">
+      <LineId Id="18" Count="24" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.getValue.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.mEquals">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.mGreaterEquals">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.mGreaterThan">
+      <LineId Id="13" Count="3" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.mLessEquals">
+      <LineId Id="6" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.mLessThan">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="RealComparator.setValue.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

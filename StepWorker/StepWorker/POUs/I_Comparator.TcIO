@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <Itf Name="I_Comparator" Id="{7fc483f0-1f23-4505-baa2-69cb8d4173ae}">
+    <Declaration><![CDATA[INTERFACE I_Comparator
+]]></Declaration>
+    <Method Name="mEquals" Id="{56bd38a4-93e1-4919-a390-2889ef572f53}">
+      <Declaration><![CDATA[METHOD mEquals : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="mGreaterEquals" Id="{16bdf04e-952e-4f1a-b41e-6389c65d0b6c}">
+      <Declaration><![CDATA[METHOD PUBLIC mGreaterEquals : BOOL
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="mGreaterThan" Id="{5dc608c8-7b71-4508-a4c9-ca829a6c7c1a}">
+      <Declaration><![CDATA[METHOD mGreaterThan : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="mLessEquals" Id="{eeeccb19-1ca5-4869-9f2f-a80634da919a}">
+      <Declaration><![CDATA[METHOD mLessEquals : BOOL
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="mLessThan" Id="{80f5d728-7167-4335-beb1-8d261bd214dd}">
+      <Declaration><![CDATA[METHOD mLessThan : BOOL;
+VAR_INPUT
+	rTarget1 : REFERENCE TO UINT;
+	rTarget2 : REFERENCE TO UINT;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

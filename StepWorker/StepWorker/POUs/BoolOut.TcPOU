@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="BoolOut" Id="{c33c3c8d-1af1-4fe2-9050-6b44e83ade36}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC BoolOut IMPLEMENTS I_StepCondition
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bValue AT%Q* : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="getValue" Id="{4e500a82-3cd9-45de-9d49-40b45ccd2d96}">
+      <Declaration><![CDATA[
+PROPERTY getValue : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{baa3866a-09e3-4c48-9aa7-022a2e4a6248}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[getValue := bValue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="setValue" Id="{708f6d83-f6e5-4439-a3bc-c4ffe722bfbd}">
+      <Declaration><![CDATA[
+PROPERTY setValue : BOOL
+]]></Declaration>
+      <Set Name="Set" Id="{6d3123a9-2116-4846-8e6a-ce53eb573339}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bValue := setValue;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="BoolOut">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolOut.getValue.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolOut.setValue.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

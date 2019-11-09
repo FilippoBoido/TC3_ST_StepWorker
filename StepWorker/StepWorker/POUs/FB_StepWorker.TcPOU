@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="FB_StepWorker" Id="{44f74475-c942-48f3-81b1-525d23658d36}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_StepWorker IMPLEMENTS I_StepWorker
+VAR_INPUT
+	bResetTimeout : BOOL;
+END_VAR
+VAR_OUTPUT
+	uiStep : UINT;
+	bTimeout : BOOL;
+END_VAR
+VAR
+	uiConditionCounter : UINT := 1;
+	aConditions	: ARRAY[1..cMaxConditions] OF I_StepCondition;
+
+	bTimeoutFlag : BOOL;	
+	fbTimeout : TON;
+	tTimeIntern : TIME;
+END_VAR
+VAR CONSTANT
+	cMaxConditions : UINT := 25;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bResetTimeout
+THEN
+	bResetTimeout := FALSE;
+	bTimeout := FALSE;
+	bTimeoutFlag := FALSE;
+END_IF
+
+fbTimeout(IN:=bTimeoutFlag, PT:=tTimeIntern , Q=>bTimeout);]]></ST>
+    </Implementation>
+    <Property Name="getStep" Id="{cc7e49fe-4043-4fc8-9e2b-4ab6eda23418}">
+      <Declaration><![CDATA[PROPERTY getStep : uint]]></Declaration>
+      <Get Name="Get" Id="{91d8eda0-726f-4e26-a74c-9f3152645e23}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[getStep := uiStep;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="mAddCondition" Id="{e348d940-57d9-4aff-be87-5a05dea3abd8}">
+      <Declaration><![CDATA[METHOD PUBLIC mAddCondition : I_StepWorker
+VAR_INPUT
+	itfStepCondition : I_StepCondition;
+END_VAR
+VAR
+	i : UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mAddCondition := THIS^;
+IF itfStepCondition = 0
+THEN
+	//Avoid null pointer exception.
+	RETURN;
+END_IF
+
+FOR i := 1 TO cMaxConditions DO
+	IF aConditions[i] = itfStepCondition 
+	THEN
+		//Condition already added.
+		RETURN;
+	END_IF
+END_FOR
+ 
+//Add new condition.
+aConditions[uiConditionCounter] := itfStepCondition;
+uiConditionCounter := uiConditionCounter + 1;
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mConfigureTimeout" Id="{fe6f174f-06ef-4ced-b025-bdae118f56fe}">
+      <Declaration><![CDATA[METHOD mConfigureTimeout : I_StepWorker
+VAR_INPUT
+	tTime : TIME;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mConfigureTimeout := THIS^;
+tTimeIntern := tTime;
+bTimeoutFlag := TRUE;
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mNextStep" Id="{fbdecb39-2f5a-4df6-a2c8-cb28af62eebe}">
+      <Declaration><![CDATA[METHOD mNextStep : BOOL
+VAR_INPUT
+	uiNextStep : UINT;
+END_VAR
+VAR
+	i : UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bTimeout
+THEN
+	RETURN;
+END_IF
+	
+FOR i := 1 TO (uiConditionCounter-1) DO
+	IF aConditions[i].getValue = FALSE 
+	THEN
+		//1 Condition is false therefor exit.
+		RETURN;
+	END_IF
+	
+END_FOR
+
+//All conditions met
+mNextStep := TRUE;
+bTimeoutFlag := FALSE;
+
+//Reset the condition counter and conditions
+FOR i := 1 TO (uiConditionCounter-1) DO
+	aConditions[i] := 0;
+END_FOR
+
+uiConditionCounter := 1;
+uiStep := uiNextStep;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_StepWorker">
+      <LineId Id="30" Count="6" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.getStep.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.mAddCondition">
+      <LineId Id="36" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.mConfigureTimeout">
+      <LineId Id="7" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="8" Count="1" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.mNextStep">
+      <LineId Id="48" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="6" Count="5" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
