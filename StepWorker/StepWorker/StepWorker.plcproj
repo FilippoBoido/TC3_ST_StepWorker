@@ -15,6 +15,11 @@
     <Implicit_KindOfTask>{60c1669a-1a3c-4689-aea9-affe5066ae31}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{8ee64df1-3396-46ce-a9df-75fa018f3eed}</Implicit_Jitter_Distribution>
     <LibraryReferences>{f1c9e403-3601-4e9f-b9c4-6aa7bb05a9d3}</LibraryReferences>
+    <Company>FactoryAutomation</Company>
+    <Released>false</Released>
+    <Title>StepWorkerLib</Title>
+    <ProjectVersion>1.0.0.1</ProjectVersion>
+    <Author>Boido</Author>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
