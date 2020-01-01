@@ -18,7 +18,7 @@
     <Company>FactoryAutomation</Company>
     <Released>false</Released>
     <Title>StepWorkerLib</Title>
-    <ProjectVersion>1.0.0.1</ProjectVersion>
+    <ProjectVersion>1.0.3.3</ProjectVersion>
     <Author>Boido</Author>
   </PropertyGroup>
   <ItemGroup>
@@ -46,7 +46,13 @@
     <Compile Include="POUs\LrealComparator.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\RealComparator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\SymbolPathStorage.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\UintComparator.TcPOU">
@@ -59,9 +65,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\I_StepWorker.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -80,15 +83,46 @@
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="VersionLib">
+      <DefaultResolution>VersionLib, * (FactoryAutomation)</DefaultResolution>
+      <Namespace>VersionLib</Namespace>
+      <Parameters>
+        <Parameter>
+          <Key>MAJOR</Key>
+          <Value>1</Value>
+        </Parameter>
+        <Parameter>
+          <Key>MINOR</Key>
+          <Value>0</Value>
+        </Parameter>
+        <Parameter>
+          <Key>REVISION</Key>
+          <Value>3</Value>
+        </Parameter>
+        <Parameter>
+          <Key>BUILD</Key>
+          <Value>3</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="StepWorker.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Version.txt">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
@@ -97,6 +131,25 @@
           <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+        <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
+        <o>
+          <v n="Name">"{8F99A816-E488-41E4-9FA3-846536012284}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
+        <o>
+          <v n="Name">"{29BD8D0C-3586-4548-BB48-497B9A01693F}"</v>
+          <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+            <v>Rules</v>
+            <o>
+              <v n="Name">"Rules"</v>
+              <d n="SubKeys" t="Hashtable" />
+              <d n="Values" t="Hashtable" />
+            </o>
+          </d>
+          <d n="Values" t="Hashtable" />
+        </o>
         <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
         <o>
           <v n="Name">"{40450F57-0AA3-4216-96F3-5444ECB29763}"</v>
@@ -111,6 +164,21 @@
           <v n="Name">"{192FAD59-8248-4824-A8DE-9177C94C195A}"</v>
           <d n="SubKeys" t="Hashtable" />
           <d n="Values" t="Hashtable" />
+        </o>
+        <v>{F66C7017-BDD8-4114-926C-81D6D687E35F}</v>
+        <o>
+          <v n="Name">"{F66C7017-BDD8-4114-926C-81D6D687E35F}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>
+        <o>
+          <v n="Name">"{246001F4-279D-43AC-B241-948EB31120E1}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="String">
+            <v>GlobalVisuImageFilePath</v>
+            <v>%APPLICATIONPATH%</v>
+          </d>
         </o>
       </d>
       <d n="Values" t="Hashtable" />

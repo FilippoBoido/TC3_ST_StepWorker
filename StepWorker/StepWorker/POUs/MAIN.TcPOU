@@ -12,10 +12,20 @@ VAR
 	uiDesiredStep : UINT := 10;
 	fbRelease : Boolean;
 	bReportTimeout : BOOL;
+	test : BOOLIN;
+	test2 : BOOLIN;
+	sAppName : STRING;
+	sProjectName : STRING;
+	SystemInfo : PlcAppSystemInfo;
+	SymbolPathStorage : SymbolPathStorage;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbUintComparator();
+      <ST><![CDATA[SystemInfo := _AppInfo;
+sAppName := _AppInfo.AppName;
+sProjectName := _AppInfo.ProjectName; 
+
+fbUintComparator();
 fbStepWorker();
 
 CASE fbStepWorker.uiStep OF
@@ -52,6 +62,10 @@ END_CASE;
 			]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="98" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="99" Count="0" />
       <LineId Id="29" Count="1" />
       <LineId Id="65" Count="0" />
       <LineId Id="15" Count="0" />

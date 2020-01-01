@@ -9,10 +9,21 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{6528C26C-9B69-4B53-B321-F1AB0D4AE307}" Name="StepWorker" PrjFilePath="StepWorker\StepWorker.plcproj" TmcFilePath="StepWorker\StepWorker.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{6528C26C-9B69-4B53-B321-F1AB0D4AE307}" Name="StepWorker" PrjFilePath="StepWorker\StepWorker.plcproj" TmcFilePath="StepWorker\StepWorker.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" ClearInvalidPersist="true" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="StepWorker\StepWorker.tmc">
 					<Name>StepWorker Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.test2.bValue</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.test.bValue</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>

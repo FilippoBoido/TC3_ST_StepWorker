@@ -1,18 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
   <POU Name="BoolOut" Id="{c33c3c8d-1af1-4fe2-9050-6b44e83ade36}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC BoolOut IMPLEMENTS I_StepCondition
+    <Declaration><![CDATA[{attribute 'call_after_init'}
+{attribute 'reflection'}
+FUNCTION_BLOCK PUBLIC BoolOut EXTENDS SymbolPathStorage IMPLEMENTS I_StepCondition
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	{attribute 'instance-path'}  
+	{attribute 'no_init'} 
+	sPath : STRING;
 	bValue AT%Q* : BOOL;
+	sInitPath : STRING;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="CallAfterInit" Id="{400f6a9f-5fff-43fb-8d37-a345e228c015}">
+      <Declaration><![CDATA[{attribute 'call_after_init'}
+METHOD PRIVATE CallAfterInit : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF uiPathCounter <= cMaxPaths 
+THEN
+	//Delete the part of the path which contains solution and project name 	
+	sInitPath := DELETE(sPath,FIND(sPath,'.'),1);
+	sInitPath := DELETE(sInitPath,FIND(sInitPath,'.'),1);
+	sInitPath := CONCAT(sInitPath,'.bValue');
+	aPaths[uiPathCounter] := sInitPath;
+	uiPathCounter := uiPathCounter + 1;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="getValue" Id="{4e500a82-3cd9-45de-9d49-40b45ccd2d96}">
       <Declaration><![CDATA[
 PROPERTY getValue : BOOL
@@ -41,6 +64,10 @@ END_VAR
     </Property>
     <LineIds Name="BoolOut">
       <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolOut.CallAfterInit">
+      <LineId Id="7" Count="7" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="BoolOut.getValue.Get">
       <LineId Id="2" Count="0" />
