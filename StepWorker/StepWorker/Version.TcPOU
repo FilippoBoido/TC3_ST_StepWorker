@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="Version" Id="{d6c83722-516d-49df-a8e5-5c93c1595c06}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Version
 VAR
@@ -27,6 +27,10 @@ Version.txt replaced with Version PRG
 
 VersionLib removed.
 
+1.0.6.6:	Boido	020120
+
+String replaced with T_MaxString: BoolIn,BoolOut,SymbolPathStorage
+
 *)]]></ST>
     </Implementation>
     <LineIds Name="Version">
@@ -41,6 +45,8 @@ VersionLib removed.
       <LineId Id="36" Count="0" />
       <LineId Id="38" Count="1" />
       <LineId Id="37" Count="0" />
+      <LineId Id="44" Count="2" />
+      <LineId Id="43" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="6" Count="0" />
     </LineIds>

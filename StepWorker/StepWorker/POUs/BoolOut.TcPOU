@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="BoolOut" Id="{c33c3c8d-1af1-4fe2-9050-6b44e83ade36}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'call_after_init'}
 {attribute 'reflection'}
@@ -11,9 +11,9 @@ END_VAR
 VAR
 	{attribute 'instance-path'}  
 	{attribute 'no_init'} 
-	sPath : STRING;
+	sPath : T_MaxString;
 	bValue AT%Q* : BOOL;
-	sInitPath : STRING;
+	sInitPath : T_MaxString;
 
 END_VAR
 ]]></Declaration>

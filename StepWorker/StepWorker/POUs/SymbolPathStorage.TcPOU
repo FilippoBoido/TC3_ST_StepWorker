@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="SymbolPathStorage" Id="{c0e9eca6-73c7-47b3-b528-a1392fd56dd4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SymbolPathStorage
 
 VAR_OUTPUT
 END_VAR
 VAR_STAT
-	aPaths : ARRAY[1..cMaxPaths] OF STRING;
+	aPaths : ARRAY[1..cMaxPaths] OF T_MaxString;
 	uiPathCounter : UINT := 1;
 END_VAR
 VAR CONSTANT
