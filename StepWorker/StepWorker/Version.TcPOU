@@ -23,6 +23,10 @@ to an ADS interface.
 
 Version.txt replaced with Version PRG
 
+1.0.5.5:	Boido	020120
+
+VersionLib removed.
+
 *)]]></ST>
     </Implementation>
     <LineIds Name="Version">
@@ -34,6 +38,9 @@ Version.txt replaced with Version PRG
       <LineId Id="9" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="30" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="37" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="6" Count="0" />
     </LineIds>
