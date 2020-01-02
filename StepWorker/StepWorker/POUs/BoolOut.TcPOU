@@ -25,14 +25,14 @@ END_VAR
 METHOD PRIVATE CallAfterInit : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF uiPathCounter <= cMaxPaths 
+        <ST><![CDATA[IF uiBoolOutPathCtr <= cMaxPaths 
 THEN
 	//Delete the part of the path which contains solution and project name 	
 	sInitPath := DELETE(sPath,FIND(sPath,'.'),1);
 	sInitPath := DELETE(sInitPath,FIND(sInitPath,'.'),1);
 	sInitPath := CONCAT(sInitPath,'.bValue');
-	aPaths[uiPathCounter] := sInitPath;
-	uiPathCounter := uiPathCounter + 1;
+	aBoolOutPaths[uiBoolOutPathCtr] := sInitPath;
+	uiBoolOutPathCtr := uiBoolOutPathCtr + 1;
 END_IF]]></ST>
       </Implementation>
     </Method>

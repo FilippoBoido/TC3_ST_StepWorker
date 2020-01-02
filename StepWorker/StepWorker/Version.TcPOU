@@ -31,6 +31,10 @@ VersionLib removed.
 
 String replaced with T_MaxString: BoolIn,BoolOut,SymbolPathStorage
 
+1.1.0.7:	Boido	020120
+
+Separation between "BoolIn" and "BoolOut" paths.
+
 *)]]></ST>
     </Implementation>
     <LineIds Name="Version">
@@ -47,7 +51,9 @@ String replaced with T_MaxString: BoolIn,BoolOut,SymbolPathStorage
       <LineId Id="37" Count="0" />
       <LineId Id="44" Count="2" />
       <LineId Id="43" Count="0" />
+      <LineId Id="49" Count="2" />
       <LineId Id="32" Count="0" />
+      <LineId Id="52" Count="0" />
       <LineId Id="6" Count="0" />
     </LineIds>
   </POU>

@@ -18,7 +18,7 @@
     <Company>FactoryAutomation</Company>
     <Released>false</Released>
     <Title>StepWorkerLib</Title>
-    <ProjectVersion>1.0.6.6</ProjectVersion>
+    <ProjectVersion>1.1.0.7</ProjectVersion>
     <Author>Boido</Author>
   </PropertyGroup>
   <ItemGroup>

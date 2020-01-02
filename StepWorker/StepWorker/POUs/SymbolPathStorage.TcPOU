@@ -6,8 +6,10 @@
 VAR_OUTPUT
 END_VAR
 VAR_STAT
-	aPaths : ARRAY[1..cMaxPaths] OF T_MaxString;
-	uiPathCounter : UINT := 1;
+	aBoolInPaths : ARRAY[1..cMaxPaths] OF T_MaxString;
+	aBoolOutPaths : ARRAY[1..cMaxPaths] OF T_MaxString;
+	uiBoolInPathCtr : UINT := 1;
+	uiBoolOutPathCtr : UINT := 1;
 END_VAR
 VAR CONSTANT
 	cMaxPaths : UINT := 512;
