@@ -18,7 +18,7 @@
     <Company>FactoryAutomation</Company>
     <Released>false</Released>
     <Title>StepWorkerLib</Title>
-    <ProjectVersion>1.0.3.3</ProjectVersion>
+    <ProjectVersion>1.0.4.4</ProjectVersion>
     <Author>Boido</Author>
   </PropertyGroup>
   <ItemGroup>
@@ -67,6 +67,9 @@
     <Compile Include="POUs\I_StepWorker.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Version.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -105,11 +108,11 @@
         </Parameter>
         <Parameter>
           <Key>REVISION</Key>
-          <Value>3</Value>
+          <Value>4</Value>
         </Parameter>
         <Parameter>
           <Key>BUILD</Key>
-          <Value>3</Value>
+          <Value>4</Value>
         </Parameter>
       </Parameters>
     </PlaceholderReference>
@@ -118,11 +121,6 @@
     <None Include="StepWorker.tmc">
       <SubType>Content</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Version.txt">
-      <SubType>Content</SubType>
-    </Content>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

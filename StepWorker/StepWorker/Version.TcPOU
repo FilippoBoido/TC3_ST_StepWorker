@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="Version" Id="{d6c83722-516d-49df-a8e5-5c93c1595c06}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Version
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*
+
+1.0.2.2:	Boido	010120
+
+Added VersionLib and Verstion.txt to the project.
+
+1.0.3.3:	Boido	010120
+
+SymbolPathStorage added to the project.
+IO FBs like BoolIn and BoolOut extend SymbolPathStorage in order to have and 
+easy way to group all symbol paths in a central storage and make it accessible 
+to an ADS interface.
+
+1.0.4.4:	Boido	020120
+
+Version.txt replaced with Version PRG
+
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="Version">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="20" Count="8" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
