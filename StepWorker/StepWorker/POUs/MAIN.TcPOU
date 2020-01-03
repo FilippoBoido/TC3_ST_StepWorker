@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="MAIN" Id="{b63b2f9e-7008-4ed9-b68d-d2eaed7795ed}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -45,7 +45,7 @@ CASE fbStepWorker.uiStep OF
 	10:	
 	
 		fbStepWorker
-			.mConfigureTimeout(T#10S)
+			.mSetTimeout(T#10S)
 			.mAddCondition(fbUintComparator)
 			.mAddCondition(fbRelease);
 			

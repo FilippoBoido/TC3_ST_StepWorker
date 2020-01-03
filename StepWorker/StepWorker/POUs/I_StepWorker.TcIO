@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <Itf Name="I_StepWorker" Id="{6e16077e-14a2-4353-85e5-4c73ddfcb1e4}">
     <Declaration><![CDATA[INTERFACE I_StepWorker
 ]]></Declaration>
@@ -9,6 +9,19 @@ VAR_INPUT
 	itfStepCondition : I_StepCondition;
 END_VAR
 ]]></Declaration>
+    </Method>
+    <Method Name="mNextStep" Id="{853a8e20-e499-46e7-a331-8f9e58e161d7}">
+      <Declaration><![CDATA[METHOD mNextStep : UINT
+VAR_INPUT
+	uiNextStep : UINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="mSetTimer" Id="{403043be-ba30-42de-9488-5c0e3d2fff2f}">
+      <Declaration><![CDATA[METHOD mSetTimer : I_StepWorker
+VAR_INPUT
+	tTime : TIME;
+END_VAR]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>

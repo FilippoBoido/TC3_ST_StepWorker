@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="FB_StepWorker" Id="{44f74475-c942-48f3-81b1-525d23658d36}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_StepWorker IMPLEMENTS I_StepWorker
 VAR_INPUT
@@ -15,6 +15,7 @@ VAR
 
 	bTimeoutFlag : BOOL;	
 	fbTimeout : TON;
+	fbTimer : TON;
 	tTimeIntern : TIME;
 END_VAR
 VAR CONSTANT
@@ -30,7 +31,8 @@ THEN
 	bTimeoutFlag := FALSE;
 END_IF
 
-fbTimeout(IN:=bTimeoutFlag, PT:=tTimeIntern , Q=>bTimeout);]]></ST>
+fbTimeout(IN:=bTimeoutFlag, PT:=tTimeIntern , Q=>bTimeout);
+fbTimer();]]></ST>
     </Implementation>
     <Property Name="getStep" Id="{cc7e49fe-4043-4fc8-9e2b-4ab6eda23418}">
       <Declaration><![CDATA[PROPERTY getStep : uint]]></Declaration>
@@ -75,21 +77,6 @@ uiConditionCounter := uiConditionCounter + 1;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="mConfigureTimeout" Id="{fe6f174f-06ef-4ced-b025-bdae118f56fe}">
-      <Declaration><![CDATA[METHOD mConfigureTimeout : I_StepWorker
-VAR_INPUT
-	tTime : TIME;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[mConfigureTimeout := THIS^;
-tTimeIntern := tTime;
-bTimeoutFlag := TRUE;
-
-
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="mNextStep" Id="{fbdecb39-2f5a-4df6-a2c8-cb28af62eebe}">
       <Declaration><![CDATA[METHOD mNextStep : UINT
 VAR_INPUT
@@ -124,15 +111,57 @@ FOR i := 1 TO (uiConditionCounter-1) DO
 END_FOR
 
 uiConditionCounter := 1;
-uiStep := uiNextStep;
-mNextStep := uiNextStep;
+
+IF fbTimer.IN 
+	AND fbTimer.Q
+THEN
+	fbTimer.IN := FALSE;
+	uiStep := uiNextStep;
+	mNextStep := uiNextStep;
+ELSIF fbTimer.IN
+	AND NOT fbTImer.Q
+THEN
+	mNextStep := uiStep;
+ELSE
+	uiStep := uiNextStep;
+	mNextStep := uiNextStep;	
+END_IF
+
+
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mSetTimeout" Id="{fe6f174f-06ef-4ced-b025-bdae118f56fe}">
+      <Declaration><![CDATA[METHOD mSetTimeout : I_StepWorker
+VAR_INPUT
+	tTime : TIME;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mSetTimeout := THIS^;
+tTimeIntern := tTime;
+bTimeoutFlag := TRUE;
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="mSetTimer" Id="{feb9bbef-be60-4033-bb9b-8d4f4516e849}">
+      <Declaration><![CDATA[METHOD mSetTimer : I_StepWorker
+VAR_INPUT
+	tTime : TIME;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mSetTimer := THIS^;
+fbTimer.PT := tTime;
+fbTimer.IN := TRUE;]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_StepWorker">
       <LineId Id="30" Count="6" />
       <LineId Id="9" Count="0" />
+      <LineId Id="58" Count="0" />
     </LineIds>
     <LineIds Name="FB_StepWorker.getStep.Get">
       <LineId Id="2" Count="0" />
@@ -153,13 +182,6 @@ mNextStep := uiNextStep;
       <LineId Id="28" Count="1" />
       <LineId Id="6" Count="0" />
       <LineId Id="10" Count="1" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StepWorker.mConfigureTimeout">
-      <LineId Id="7" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="8" Count="1" />
-      <LineId Id="6" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_StepWorker.mNextStep">
@@ -184,10 +206,23 @@ mNextStep := uiNextStep;
       <LineId Id="23" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="20" Count="0" />
-      <LineId Id="16" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="73" Count="4" />
+      <LineId Id="79" Count="6" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="78" Count="0" />
       <LineId Id="62" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.mSetTimeout">
+      <LineId Id="23" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.mSetTimer">
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>
