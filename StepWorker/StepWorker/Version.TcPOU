@@ -44,6 +44,12 @@ before releasing the next step.
 1.2.1.9:	Boido	040120
 
 mSetTimer and mNextStep added to I_StepWorker interface
+
+2.0.0.10:	Boido	080120
+
+Positive and negative condition check added to FB_StepWorker.
+Adapted naming convention.
+
 *)]]></ST>
     </Implementation>
     <LineIds Name="Version">
@@ -72,6 +78,11 @@ mSetTimer and mNextStep added to I_StepWorker interface
       <LineId Id="62" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="64" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="74" Count="1" />
       <LineId Id="6" Count="0" />
     </LineIds>
   </POU>

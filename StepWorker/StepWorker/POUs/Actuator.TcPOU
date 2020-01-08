@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="Actuator" Id="{bd3f25da-700d-4a57-b9b7-112a23ed66c4}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK Actuator
+    <Declaration><![CDATA[FUNCTION_BLOCK Actuator 
 VAR_INPUT
 END_VAR
 VAR_OUTPUT

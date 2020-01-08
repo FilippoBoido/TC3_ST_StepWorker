@@ -34,34 +34,25 @@ END_IF
 fbTimeout(IN:=bTimeoutFlag, PT:=tTimeIntern , Q=>bTimeout);
 fbTimer();]]></ST>
     </Implementation>
-    <Property Name="getStep" Id="{cc7e49fe-4043-4fc8-9e2b-4ab6eda23418}">
-      <Declaration><![CDATA[PROPERTY getStep : uint]]></Declaration>
-      <Get Name="Get" Id="{91d8eda0-726f-4e26-a74c-9f3152645e23}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[getStep := uiStep;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Method Name="mAddCondition" Id="{e348d940-57d9-4aff-be87-5a05dea3abd8}">
-      <Declaration><![CDATA[METHOD PUBLIC mAddCondition : I_StepWorker
+    <Method Name="AndNegCondition" Id="{6f316bf1-42e4-4e90-a61a-7baff43334c0}">
+      <Declaration><![CDATA[METHOD AndNegCondition : I_StepWorker
 VAR_INPUT
 	itfStepCondition : I_StepCondition;
 END_VAR
 VAR
 	i : UINT;
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[mAddCondition := THIS^;
-IF itfStepCondition = 0
+        <ST><![CDATA[andNegCondition := THIS^;
+IF itfStepCondition = 0 //Avoid null pointer exception.
+	OR uiConditionCounter = cMaxConditions + 1
 THEN
-	//Avoid null pointer exception.
+	
 	RETURN;
 END_IF
 
-FOR i := 1 TO cMaxConditions DO
+FOR i := 1 TO uiConditionCounter DO
 	IF aConditions[i] = itfStepCondition 
 	THEN
 		//Condition already added.
@@ -70,15 +61,49 @@ FOR i := 1 TO cMaxConditions DO
 END_FOR
  
 //Add new condition.
+itfStepCondition.NegCondition();
 aConditions[uiConditionCounter] := itfStepCondition;
 uiConditionCounter := uiConditionCounter + 1;
-
 
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="mNextStep" Id="{fbdecb39-2f5a-4df6-a2c8-cb28af62eebe}">
-      <Declaration><![CDATA[METHOD mNextStep : UINT
+    <Method Name="AndPosCondition" Id="{8ec1ae46-390d-491a-806a-a2abcd8e50a5}">
+      <Declaration><![CDATA[METHOD AndPosCondition : I_StepWorker
+VAR_INPUT
+	itfStepCondition : I_StepCondition;
+END_VAR
+VAR
+	i : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[andPosCondition := THIS^;
+IF itfStepCondition = 0 //Avoid null pointer exception.
+	OR uiConditionCounter = cMaxConditions + 1
+THEN
+	
+	RETURN;
+END_IF
+
+FOR i := 1 TO uiConditionCounter DO
+	IF aConditions[i] = itfStepCondition 
+	THEN
+		//Condition already added.
+		RETURN;
+	END_IF
+END_FOR
+ 
+//Add new condition.
+itfStepCondition.PosCondition();
+aConditions[uiConditionCounter] := itfStepCondition;
+uiConditionCounter := uiConditionCounter + 1;
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NextStep" Id="{fbdecb39-2f5a-4df6-a2c8-cb28af62eebe}">
+      <Declaration><![CDATA[METHOD NextStep : UINT
 VAR_INPUT
 	uiNextStep : UINT;
 END_VAR
@@ -88,17 +113,29 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF bTimeout
 THEN
-	mNextStep := uiStep;
+	NextStep := uiStep;
 	RETURN;
 END_IF
 	
 FOR i := 1 TO (uiConditionCounter-1) DO
-	IF aConditions[i].getValue = FALSE 
+	IF aConditions[i].isNegative
 	THEN
-		//1 Condition is false therefor exit.
-		mNextStep := uiStep;
-		RETURN;
+		IF aConditions[i].getValue = TRUE 
+		THEN
+			//one Condition is True therefor exit.
+			NextStep := uiStep;
+			RETURN;
+		END_IF
+	ELSIF aConditions[i].isPositive
+	THEN
+		IF aConditions[i].getValue = FALSE 
+		THEN
+			//one Condition is false therefor exit.
+			NextStep := uiStep;
+			RETURN;
+		END_IF
 	END_IF
+	
 	
 END_FOR
 
@@ -117,14 +154,14 @@ IF fbTimer.IN
 THEN
 	fbTimer.IN := FALSE;
 	uiStep := uiNextStep;
-	mNextStep := uiNextStep;
+	NextStep := uiNextStep;
 ELSIF fbTimer.IN
 	AND NOT fbTImer.Q
 THEN
-	mNextStep := uiStep;
+	NextStep := uiStep;
 ELSE
 	uiStep := uiNextStep;
-	mNextStep := uiNextStep;	
+	NextStep := uiNextStep;	
 END_IF
 
 
@@ -132,14 +169,14 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="mSetTimeout" Id="{fe6f174f-06ef-4ced-b025-bdae118f56fe}">
-      <Declaration><![CDATA[METHOD mSetTimeout : I_StepWorker
+    <Method Name="SetTimeout" Id="{fe6f174f-06ef-4ced-b025-bdae118f56fe}">
+      <Declaration><![CDATA[METHOD SetTimeout : I_StepWorker
 VAR_INPUT
 	tTime : TIME;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[mSetTimeout := THIS^;
+        <ST><![CDATA[SetTimeout := THIS^;
 tTimeIntern := tTime;
 bTimeoutFlag := TRUE;
 
@@ -147,13 +184,13 @@ bTimeoutFlag := TRUE;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="mSetTimer" Id="{feb9bbef-be60-4033-bb9b-8d4f4516e849}">
-      <Declaration><![CDATA[METHOD mSetTimer : I_StepWorker
+    <Method Name="SetTimer" Id="{feb9bbef-be60-4033-bb9b-8d4f4516e849}">
+      <Declaration><![CDATA[METHOD SetTimer : I_StepWorker
 VAR_INPUT
 	tTime : TIME;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[mSetTimer := THIS^;
+        <ST><![CDATA[SetTimer := THIS^;
 fbTimer.PT := tTime;
 fbTimer.IN := TRUE;]]></ST>
       </Implementation>
@@ -163,37 +200,32 @@ fbTimer.IN := TRUE;]]></ST>
       <LineId Id="9" Count="0" />
       <LineId Id="58" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StepWorker.getStep.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StepWorker.mAddCondition">
-      <LineId Id="36" Count="0" />
-      <LineId Id="12" Count="1" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="23" Count="1" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="10" Count="1" />
+    <LineIds Name="FB_StepWorker.AndNegCondition">
+      <LineId Id="6" Count="20" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StepWorker.mNextStep">
+    <LineIds Name="FB_StepWorker.AndPosCondition">
+      <LineId Id="6" Count="16" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="23" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StepWorker.NextStep">
       <LineId Id="48" Count="0" />
       <LineId Id="50" Count="0" />
       <LineId Id="60" Count="0" />
       <LineId Id="53" Count="0" />
       <LineId Id="52" Count="0" />
       <LineId Id="51" Count="0" />
-      <LineId Id="6" Count="3" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="10" Count="1" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="92" Count="1" />
+      <LineId Id="96" Count="4" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="101" Count="1" />
+      <LineId Id="104" Count="4" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="11" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="41" Count="0" />
@@ -216,13 +248,13 @@ fbTimer.IN := TRUE;]]></ST>
       <LineId Id="14" Count="0" />
       <LineId Id="17" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StepWorker.mSetTimeout">
-      <LineId Id="23" Count="4" />
+    <LineIds Name="FB_StepWorker.SetTimeout">
+      <LineId Id="36" Count="4" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StepWorker.mSetTimer">
-      <LineId Id="5" Count="0" />
-      <LineId Id="8" Count="1" />
+    <LineIds Name="FB_StepWorker.SetTimer">
+      <LineId Id="16" Count="1" />
+      <LineId Id="9" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

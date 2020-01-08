@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <Itf Name="I_StepCondition" Id="{f45c417b-68ad-4c0b-a126-3513c0ea3d19}">
     <Declaration><![CDATA[INTERFACE I_StepCondition
 ]]></Declaration>
@@ -9,6 +9,30 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="isNegative" Id="{13870072-1c74-40a8-90bd-daee89c8b6bf}">
+      <Declaration><![CDATA[PROPERTY isNegative : Bool]]></Declaration>
+      <Get Name="Get" Id="{95b994b8-f6c6-442e-b7fb-18c2e592ac3c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="isPositive" Id="{b4cb559f-8319-4782-b92c-8fc776523afa}">
+      <Declaration><![CDATA[PROPERTY isPositive : Bool]]></Declaration>
+      <Get Name="Get" Id="{ac731e93-1ac9-4f40-bd2e-a6d303b4c552}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="NegCondition" Id="{f84c5ef2-e96d-45c6-bc06-cdf8b894819a}">
+      <Declaration><![CDATA[METHOD NegCondition : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="PosCondition" Id="{b9504ef5-21f3-436c-b0db-a7b273ebb7b4}">
+      <Declaration><![CDATA[METHOD PosCondition : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
     <Property Name="setValue" Id="{6923ac5c-b313-4703-97f2-d0ab16e525c6}">
       <Declaration><![CDATA[PROPERTY setValue : Bool]]></Declaration>
       <Set Name="Set" Id="{97471d9e-d88e-451e-bd32-9c86b92b9898}">

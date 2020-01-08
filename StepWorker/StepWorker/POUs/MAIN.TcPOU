@@ -35,21 +35,20 @@ CASE fbStepWorker.uiStep OF
 		fbUintComparator.mEquals(fbStepWorker.uiStep,uiDesiredStep);
 		
 		fbStepWorker
-			.mAddCondition(Valve1.fbOutput)
-			.mAddCondition(Valve2.fbOutput)
-			.mAddCondition(Valve3.fbOutput);
+			.AndPosCondition(Valve1.fbOutput)
+			.AndPosCondition(Valve2.fbOutput)
+			.AndPosCondition(Valve3.fbOutput);
 			
-		fbStepWorker.mNextStep(10);
-		
+		fbStepWorker.NextStep(10);		
 		
 	10:	
 	
 		fbStepWorker
-			.mSetTimeout(T#10S)
-			.mAddCondition(fbUintComparator)
-			.mAddCondition(fbRelease);
+			.SetTimeout(T#10S)
+			.AndPosCondition(fbUintComparator)
+			.AndPosCondition(fbRelease);
 			
-		fbStepWorker.mNextStep(20);
+		fbStepWorker.NextStep(20);
 		bReportTimeout := fbStepWorker.bTimeout;
 		
 	20:
@@ -75,7 +74,7 @@ END_CASE;
       <LineId Id="21" Count="1" />
       <LineId Id="20" Count="0" />
       <LineId Id="17" Count="0" />
-      <LineId Id="23" Count="2" />
+      <LineId Id="23" Count="1" />
       <LineId Id="48" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="46" Count="0" />

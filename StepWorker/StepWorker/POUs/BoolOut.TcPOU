@@ -14,7 +14,8 @@ VAR
 	sPath : T_MaxString;
 	bValue AT%Q* : BOOL;
 	sInitPath : T_MaxString;
-
+	bPositive : BOOL;
+	bNegative : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -49,6 +50,50 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="isNegative" Id="{b32799fc-7692-4bbe-9723-39bb7f449215}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY isNegative : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{7a8222f5-ef5a-40a5-af8a-de79c7173843}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isNegative := bNegative;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isPositive" Id="{e3bbf2e5-9cbf-429f-808d-9bacc80b078f}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY isPositive : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{f2e3c22e-080c-436c-ab11-1a4088614b85}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isPositive := bPositive;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="NegCondition" Id="{b54f29fd-085b-48de-8fc6-f4a99e8db9f6}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD NegCondition : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bPositive := FALSE;
+bNegative := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PosCondition" Id="{13a1fc13-f6c7-4f6b-ab32-763834ce1ff2}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD PosCondition : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bPositive := TRUE;
+bNegative := FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="setValue" Id="{708f6d83-f6e5-4439-a3bc-c4ffe722bfbd}">
       <Declaration><![CDATA[
 PROPERTY setValue : BOOL
@@ -71,6 +116,18 @@ END_VAR
     </LineIds>
     <LineIds Name="BoolOut.getValue.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolOut.isNegative.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolOut.isPositive.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolOut.NegCondition">
+      <LineId Id="4" Count="1" />
+    </LineIds>
+    <LineIds Name="BoolOut.PosCondition">
+      <LineId Id="4" Count="1" />
     </LineIds>
     <LineIds Name="BoolOut.setValue.Set">
       <LineId Id="2" Count="0" />

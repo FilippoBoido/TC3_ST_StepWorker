@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
   <POU Name="UintComparator" Id="{c3538391-8178-426b-8224-2c8c8631c8cc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK UintComparator IMPLEMENTS I_Comparator,I_StepCondition
 VAR_INPUT
@@ -51,6 +51,32 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[getValue := bValue;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isNegative" Id="{dd47f71a-6d5b-4914-beaa-f10966029505}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY isNegative : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{9c4de2ac-8811-4a05-a6a0-3c2b43688989}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isPositive" Id="{55855aef-6ee3-47bf-88ec-48549d1f540b}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY isPositive : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{2f841de3-959e-40d9-a960-7a4362d77850}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -131,6 +157,22 @@ rInternTarget2 REF= rTarget2;
 mLessThan := ( rTarget1 < rTarget2 );]]></ST>
       </Implementation>
     </Method>
+    <Method Name="NegCondition" Id="{3a4cb543-fde9-464a-8ca8-a1687f9ea62c}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD NegCondition : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PosCondition" Id="{50269332-d771-4a9e-b1d2-da4e17dfb6b7}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD PosCondition : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="setValue" Id="{6c9d6573-9f69-4bf2-84c3-df921f23e5eb}">
       <Declaration><![CDATA[
 PROPERTY setValue : BOOL
@@ -166,6 +208,12 @@ END_VAR
     <LineIds Name="UintComparator.getValue.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="UintComparator.isNegative.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.isPositive.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="UintComparator.mEquals">
       <LineId Id="5" Count="0" />
       <LineId Id="9" Count="0" />
@@ -192,6 +240,12 @@ END_VAR
       <LineId Id="9" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.NegCondition">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="UintComparator.PosCondition">
+      <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="UintComparator.setValue.Set">
       <LineId Id="2" Count="0" />

@@ -3,22 +3,36 @@
   <Itf Name="I_StepWorker" Id="{6e16077e-14a2-4353-85e5-4c73ddfcb1e4}">
     <Declaration><![CDATA[INTERFACE I_StepWorker
 ]]></Declaration>
-    <Method Name="mAddCondition" Id="{22238d22-4d9e-4af6-9b13-3aa58c4ea183}">
-      <Declaration><![CDATA[METHOD PUBLIC mAddCondition : I_StepWorker
+    <Method Name="AndNegCondition" Id="{bbcaa3e9-c4d3-4391-8828-e95e18ba46ed}">
+      <Declaration><![CDATA[METHOD AndNegCondition : I_StepWorker
 VAR_INPUT
 	itfStepCondition : I_StepCondition;
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="mNextStep" Id="{853a8e20-e499-46e7-a331-8f9e58e161d7}">
-      <Declaration><![CDATA[METHOD mNextStep : UINT
+    <Method Name="AndPosCondition" Id="{2b197d06-9af9-4b5e-8e04-da331ec30954}">
+      <Declaration><![CDATA[METHOD AndPosCondition : I_StepWorker
+VAR_INPUT
+	itfStepCondition : I_StepCondition;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="NextStep" Id="{853a8e20-e499-46e7-a331-8f9e58e161d7}">
+      <Declaration><![CDATA[METHOD NextStep : UINT
 VAR_INPUT
 	uiNextStep : UINT;
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="mSetTimer" Id="{403043be-ba30-42de-9488-5c0e3d2fff2f}">
-      <Declaration><![CDATA[METHOD mSetTimer : I_StepWorker
+    <Method Name="SetTimeout" Id="{e1b531d4-09ec-4efb-9106-a350de526e99}">
+      <Declaration><![CDATA[METHOD SetTimeout : I_StepWorker
+VAR_INPUT
+	tTime : TIME;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="SetTimer" Id="{403043be-ba30-42de-9488-5c0e3d2fff2f}">
+      <Declaration><![CDATA[METHOD SetTimer : I_StepWorker
 VAR_INPUT
 	tTime : TIME;
 END_VAR]]></Declaration>

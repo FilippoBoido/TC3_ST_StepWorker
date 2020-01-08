@@ -15,6 +15,8 @@ VAR
 	sPath : T_MaxString;
 	bValue AT%I* : BOOL;
 	sInitPath : T_MaxString;
+	bPositive : BOOL;
+	bNegative : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -49,6 +51,50 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="isNegative" Id="{d93f6e4c-5a32-404a-bd50-f17ade641554}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY isNegative : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{d59c55a5-0822-42c9-80bb-be3d5447d660}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isNegative := bNegative;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="isPositive" Id="{0791bff9-fd75-49be-ae87-b57441c49876}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY isPositive : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{2f154a55-8afb-4436-9860-b07ee3cbd135}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isPositive := bPositive;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="NegCondition" Id="{9a176372-73bb-43d8-a7fd-e20a680dc47e}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD NegCondition : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bPositive := FALSE;
+bNegative := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PosCondition" Id="{3071878a-00c7-4889-8371-bdaefab47f78}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD PosCondition : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bPositive := TRUE;
+bNegative := FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="setValue" Id="{89adadce-2c51-491c-a739-6235884b2a94}">
       <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
 PROPERTY setValue : BOOL
@@ -71,6 +117,20 @@ END_VAR
     </LineIds>
     <LineIds Name="BoolIn.getValue.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolIn.isNegative.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolIn.isPositive.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolIn.NegCondition">
+      <LineId Id="5" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="BoolIn.PosCondition">
+      <LineId Id="5" Count="0" />
+      <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="BoolIn.setValue.Set">
       <LineId Id="2" Count="0" />
