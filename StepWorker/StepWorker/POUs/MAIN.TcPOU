@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="MAIN" Id="{b63b2f9e-7008-4ed9-b68d-d2eaed7795ed}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+    <Declaration><![CDATA[
+PROGRAM MAIN
 VAR
 	fbStepWorker : FB_StepWorker;
 	Valve1 : Actuator;
@@ -21,7 +22,22 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SystemInfo := _AppInfo;
+      <ST><![CDATA[
+(*
+This code defines a Structured Text (ST) program for a PLC system that utilizes the "FB_StepWorker" Function Block. 
+It declares several variables, including instances of the "FB_StepWorker," "Actuator," and "UintComparator" function blocks, as well as a number of input and output variables.
+
+In the main body of the program, the "FB_StepWorker" function block is used to execute a series of steps in sequence. 
+The current step is determined by the "uiStep" output of the "FB_StepWorker" function block, and the program executes different code for each step using a "CASE" statement.
+
+For example, in step 0, the "fbUintComparator" function block is used to compare the current step to a desired step, and this result is used as a condition for the "FB_StepWorker" function block. 
+The "FB_StepWorker" function block is also configured with three step conditions using the "AndPosCondition" method, and the next step is set to 10 using the "NextStep" method.
+
+In step 10, the "FB_StepWorker" function block is configured with a timeout of 10 seconds using the "SetTimeout" method, and it is given two step conditions using the "AndPosCondition" method. 
+The next step is set to 20, and the "bTimeout" output of the "FB_StepWorker" function block is assigned to the "bReportTimeout" variable.
+
+*)
+SystemInfo := _AppInfo;
 sAppName := _AppInfo.AppName;
 sProjectName := _AppInfo.ProjectName; 
 
@@ -61,6 +77,9 @@ END_CASE;
 			]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="145" Count="0" />
+      <LineId Id="147" Count="12" />
+      <LineId Id="146" Count="0" />
       <LineId Id="98" Count="0" />
       <LineId Id="81" Count="0" />
       <LineId Id="79" Count="0" />
